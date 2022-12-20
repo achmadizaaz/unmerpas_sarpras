@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 class UserRolePermissionSedeer extends Seeder
 {
@@ -17,12 +18,15 @@ class UserRolePermissionSedeer extends Seeder
      */
     public function run()
     {
+
+        // Reset cached roles and permissions
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
         
         // Create Permission
-        Permission::create(['create gedung']);
-        Permission::create(['read gedung']);
-        Permission::create(['update gedung']);
-        Permission::create(['delete gedung']);
+        Permission::create(['name'=> 'create gedung']);
+        Permission::create(['name'=> 'read gedung']);
+        Permission::create(['name'=> 'update gedung']);
+        Permission::create(['name'=> 'delete gedung']);
 
         // Create Role
         $role1 = Role::create(['name' => 'administrator']);
@@ -32,7 +36,7 @@ class UserRolePermissionSedeer extends Seeder
         $role1->givePermissionTo('delete gedung');
 
         $role2 = Role::create(['name' => 'unit']);
-        $role2->givePermessionTo('read gedung');
+        $role2->givePermissionTo('read gedung');
         
         $defaultUser = [
             'email_verified_at' => now(),
