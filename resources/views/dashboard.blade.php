@@ -11,6 +11,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     You're logged in!
                 </div>
+                <a href="/gedung">Gedung</a>
             </div>
         </div>
     </div>

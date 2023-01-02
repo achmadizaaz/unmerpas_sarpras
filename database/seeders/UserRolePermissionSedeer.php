@@ -22,6 +22,8 @@ class UserRolePermissionSedeer extends Seeder
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
         
+        $role = Role::create(['name' => 'super administrator']);
+
         // Create Permission
         Permission::create(['name'=> 'create gedung']);
         Permission::create(['name'=> 'read gedung']);
@@ -45,6 +47,12 @@ class UserRolePermissionSedeer extends Seeder
         ];
 
         // Account User
+        $superadmin = User::create(array_merge($defaultUser,[
+            'name' => 'super administrator',
+            'email' => 'superadmin@unmerpas.ac.id'
+        ]));
+
+        $superadmin->assignRole($role);
 
         $admin = User::create(array_merge($defaultUser,[
             'name' => 'administrator',
