@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GedungController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +30,8 @@ require __DIR__.'/auth.php';
 // Route Gedung
 
 Route::get('/gedung', [GedungController::class, 'index']);
+
+// Router User
+Route::controller(UserController::class)->prefix('admin/user')->group(function(){
+    Route::get('/', 'index')->name('user.index');
+});
